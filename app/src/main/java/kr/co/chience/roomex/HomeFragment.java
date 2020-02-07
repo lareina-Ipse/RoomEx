@@ -15,7 +15,7 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private Button btnAdd, btnView, btnUpdate, btnDelete;
 
@@ -34,14 +34,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         btnUpdate = view.findViewById(R.id.update);
         btnDelete = view.findViewById(R.id.delete);
         btnAdd.setOnClickListener(this);
+        btnView.setOnClickListener(this);
+        btnUpdate.setOnClickListener(this);
+        btnDelete.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View v) {
-        MainActivity.fragmentManager.beginTransaction()
-                .replace(R.id.Container, new AddFragment(), null)
-                .addToBackStack(null)
-                .commit();
+
+        switch (v.getId()) {
+            case R.id.add:
+                MainActivity.fragmentManager.beginTransaction()
+                        .replace(R.id.Container, new AddFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+
+            case R.id.view:
+                MainActivity.fragmentManager.beginTransaction()
+                        .replace(R.id.Container, new ViewFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+
+            case R.id.update:
+                MainActivity.fragmentManager.beginTransaction()
+                        .replace(R.id.Container, new UpdateFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+
+                break;
+
+        }
+
+
     }
 }
